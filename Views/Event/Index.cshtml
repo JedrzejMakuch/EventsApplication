@@ -1,0 +1,29 @@
+﻿@model IEnumerable<EventsApplication.Models.Event>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Events List</h1>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Tickets left</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>@e.Name</td>
+                <td>@e.Tickets</td>
+                <td>@Html.ActionLink("Details", "Details", "Event", new { id = e.Id }, null)</td>
+                <td>@Html.ActionLink("Edit", "Edit", "Event", new {id = e.Id}, null)</td>
+                <td>@Html.ActionLink("Delete", "Delete", "Event", new { id = e.Id }, null)</td>
+            </tr>
+        }
+    </tbody>
+</table>

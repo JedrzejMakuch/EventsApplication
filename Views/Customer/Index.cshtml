@@ -1,0 +1,33 @@
+﻿@model IEnumerable<EventsApplication.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Customers who bought tickets</h1>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Registered</th>
+            <th>Tickets</th>
+            <th>Ticket number</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.FirstName</td>
+                <td>@p.LastName</td>
+                <td>@p.Email</td>
+                <td>@p.IsRegistered.HasValue</td>
+                <td>@p.Event.Name</td>
+                <td>@p.Id</td>
+            </tr>
+        }
+    </tbody>
+</table>

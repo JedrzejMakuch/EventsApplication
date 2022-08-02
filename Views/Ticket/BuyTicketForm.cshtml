@@ -1,0 +1,27 @@
+﻿@model EventsApplication.ViewModel.BuyTicketFormViewModel
+@{
+    ViewData["Title"] = "BuyTicketForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Buy ticket for @Model.Event.Name</h1>
+
+@using (@Html.BeginForm("BuyTicketSave", "Ticket"))
+{
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.Customer.FirstName)
+        @Html.TextBoxFor(p => p.Customer.FirstName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(p => p.Customer.LastName)
+        @Html.TextBoxFor(p => p.Customer.LastName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(p => p.Customer.Email)
+        @Html.TextBoxFor(p => p.Customer.Email, new { @class = "form-control" })
+    </div>
+    Model.Customer.EventId = Model.Event.Id;
+    @Html.HiddenFor(e => e.Customer.EventId)
+    <button type="submit" class="btn">Buy Ticket</button>
+}

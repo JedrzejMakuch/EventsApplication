@@ -1,0 +1,31 @@
+﻿@model EventsApplication.ViewModel.BuyTicketFormViewModel
+@{
+    ViewBag.Title = "RefundTicketForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Refund ticket for @Model.Event.Name</h2>
+
+@using (@Html.BeginForm("RefundTicketSave", "Ticket"))
+{
+    <div class="form-group">
+        @Html.LabelFor(p => p.Customer.Id)
+        @Html.TextBoxFor(p => p.Customer.Id, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(p => p.Customer.FirstName)
+        @Html.TextBoxFor(p => p.Customer.FirstName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(p => p.Customer.LastName)
+        @Html.TextBoxFor(p => p.Customer.LastName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(p => p.Customer.Email)
+        @Html.TextBoxFor(p => p.Customer.Email, new { @class = "form-control" })
+    </div>
+    Model.Customer.EventId = Model.Event.Id;
+    @Html.HiddenFor(e => e.Customer.EventId)
+    <button type="submit" class="btn">Refund Ticket</button>
+}
+
