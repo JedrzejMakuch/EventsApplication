@@ -59,18 +59,18 @@ namespace EventsApplication.Controllers
                 Event = events
             };
 
-            return View(viewModel);
+            return View("EventForm", viewModel);
         }
 
         [HttpPost]
         public ActionResult Save(Event Event)
         {
 
-            if (!ModelState.IsValid)
-            {
-                var viewModel = new EventFormViewModel { Event = Event };
-                return View("EventForm", viewModel);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    var viewModel = new EventFormViewModel { Event = Event };
+            //    return View("EventForm", viewModel);
+            //}
 
 
             if (Event.Id == 0)

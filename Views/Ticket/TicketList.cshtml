@@ -1,0 +1,40 @@
+﻿@model EventsApplication.ViewModel.BuyTicketFormViewModel
+@{
+    ViewBag.Title = "TicketList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Ticket List for @Model.Event.Name</h3>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Registered</th>
+            <th>Ticket number</th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @foreach (var p in Model.Customers)
+        {
+            if (p.EventId == Model.Event.Id)
+            {
+                <tr>
+                    <td>@p.FirstName</td>
+                    <td>@p.LastName</td>
+                    <td>@p.Email</td>
+                    <td>@p.IsRegistered.HasValue</td>
+                    <td>@p.Id</td>
+
+                </tr>
+            }
+
+        }
+
+
+    </tbody>
+</table>

@@ -8,6 +8,7 @@ namespace EventsApplication.ViewModel
 {
     public class BuyTicketFormViewModel
     {
+        public IEnumerable<Customer> Customers { get; set; }
         public Event Event { get; set; }
         public Customer Customer { get; set; }
     }
