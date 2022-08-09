@@ -286,6 +286,9 @@
     <Compile Include="Service\CustomerService.cs" />
     <Compile Include="Service\EventService.cs" />
     <Compile Include="Service\ICustomerService.cs" />
+    <Compile Include="Service\IEventService.cs" />
+    <Compile Include="Service\ITicketService.cs" />
+    <Compile Include="Service\TicketService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\AccountViewModels.cs" />
     <Compile Include="ViewModel\TicketViewModels\BuyTicketFormViewModel.cs" />

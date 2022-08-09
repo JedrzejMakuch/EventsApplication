@@ -1,9 +1,6 @@
 ﻿using EventsApplication.Models;
-using System;
+using EventsApplication.ViewModel;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EventsApplication.Service
 {
@@ -11,5 +8,7 @@ namespace EventsApplication.Service
     {
         Customer GetNewCustomer();
         IEnumerable<Customer> GetCustomersList();
+        Customer GetCustomerId(Customer Customer);
+        bool ValidateCustomer(ReturnTicketFormViewModel returnTicketFormViewModel, Ticket ticket);
     }
 }

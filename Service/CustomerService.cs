@@ -1,4 +1,5 @@
 ﻿using EventsApplication.Models;
+using EventsApplication.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,7 +11,7 @@ namespace EventsApplication.Service
     public class CustomerService : ICustomerService
     {
         private readonly ApplicationDbContext _dbContext;
-     
+      
         public CustomerService(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -30,26 +31,13 @@ namespace EventsApplication.Service
             return _dbContext.Customers.FirstOrDefault(c => c.Id == Customer.Id);
         }
 
-        public bool CheckCustomerEFNLN(Customer Customer)
+        public bool ValidateCustomer(ReturnTicketFormViewModel returnTicketFormViewModel, Ticket ticket)
         {
-            return GetCustomerId(Customer).Email == Customer.Email &&
-                   GetCustomerId(Customer).FirstName == Customer.FirstName &&
-                   GetCustomerId(Customer).LastName == Customer.LastName;
+            return returnTicketFormViewModel.Customer.FirstName == ticket.Customer.FirstName &&
+                            returnTicketFormViewModel.Customer.LastName == ticket.Customer.LastName &&
+                            returnTicketFormViewModel.Customer.Email == ticket.Customer.Email;
         }
 
-        public void SaveData()
-        {
-             _dbContext.SaveChanges();
-        }
-
-        //public EntityState RemoveCustomer(Customer Customer)
-        //{
-        //    return _dbContext.Entry(Customer).State = EntityState.Deleted;
-        //}
-
-        public Customer AddNewCustomer(Customer customer)
-        {
-            return _dbContext.Customers.Add(customer);
-        }
+    
     }
 }

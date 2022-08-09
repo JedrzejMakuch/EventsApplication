@@ -1,6 +1,5 @@
-﻿using EventsApplication.Models;
+﻿using EventsApplication.Service;
 using EventsApplication.ViewModel;
-using System.Linq;
 using System.Web.Mvc;
 
 
@@ -8,44 +7,37 @@ namespace EventsApplication.Controllers
 {
     public class EventController : Controller
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly IEventService _eventService;
 
-        public EventController()
+        public EventController(IEventService eventService)
         {
-            _dbContext = new ApplicationDbContext();
+            _eventService = eventService;
         }
 
         public ActionResult Index()
         {
-            var events = _dbContext.Events.ToList();
-            return View(events);
+            return View(_eventService.GetEventList());
         }
-
-
 
         public ActionResult New()
         {
             var viewModel = new EventFormViewModel
             {
-                Event = new Event()
+                Event = _eventService.GetNewEvent()
             };
             return View("EventForm", viewModel);
         }
 
         public ActionResult Details(int Id)
         {
-            var events = _dbContext.Events.SingleOrDefault(e => e.Id == Id);
-
-            return View(events);
+            return View(_eventService.GetEventId(Id));
         }
 
         public ActionResult Edit(int Id)
         {
-            var events = _dbContext.Events.FirstOrDefault(e => e.Id == Id);
-
             var viewModel = new EventFormViewModel
             {
-                Event = events
+                Event = _eventService.GetEventId(Id),
             };
 
             return View("EventForm", viewModel);
@@ -54,31 +46,17 @@ namespace EventsApplication.Controllers
         [HttpPost]
         public ActionResult Save(EventFormViewModel newEventFormViewModel)
         {
-
-            if (newEventFormViewModel.Event.Id == 0)
-                _dbContext.Events.Add(newEventFormViewModel.Event);
-            else
-            {
-                var eventInDb = _dbContext.Events.Single(e => e.Id == newEventFormViewModel.Event.Id);
-                eventInDb.Name = newEventFormViewModel.Event.Name;
-                eventInDb.Description = newEventFormViewModel.Event.Description;
-                eventInDb.Tickets = newEventFormViewModel.Event.Tickets;
-                eventInDb.DateOfStart = newEventFormViewModel.Event.DateOfStart;
-                eventInDb.DateOfEnd = newEventFormViewModel.Event.DateOfEnd;
-            }
-            _dbContext.SaveChanges();
+            _eventService.SaveNewEditEvent(newEventFormViewModel);
 
             return RedirectToAction("Index", "Event");
         }
 
         public ActionResult Delete(int Id)
         {
-            var events = _dbContext.Events.FirstOrDefault(e => e.Id == Id);
-
-            _dbContext.Events.Remove(events);
-            _dbContext.SaveChanges();
+            _eventService.DeleteEvent(Id);
 
             return RedirectToAction("Index", "Event");
         }
+
     }
 }

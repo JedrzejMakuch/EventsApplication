@@ -25,7 +25,8 @@ namespace EventsApplication
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<ApplicationDbContext>().AsSelf();
             builder.RegisterType<CustomerService>().As<ICustomerService>();
-
+            builder.RegisterType<EventService>().As<IEventService>();
+            builder.RegisterType<TicketService>().As<ITicketService>();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
