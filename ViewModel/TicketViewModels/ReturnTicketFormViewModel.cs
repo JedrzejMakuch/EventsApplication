@@ -6,10 +6,10 @@ using System.Web;
 
 namespace EventsApplication.ViewModel
 {
-    public class BuyTicketFormViewModel
+    public class ReturnTicketFormViewModel
     {
-        public IEnumerable<Customer> Customers { get; set; }
-        public Event Event { get; set; }
+        public Ticket Ticket { get; set; }
         public Customer Customer { get; set; }
+        public Event Event { get; set; }    
     }
 }

@@ -1,16 +1,16 @@
-﻿@model EventsApplication.ViewModel.BuyTicketFormViewModel
+﻿@model EventsApplication.ViewModel.ReturnTicketFormViewModel
 @{
     ViewBag.Title = "RefundTicketForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Refund ticket for @Model.Event.Name</h2>
+<h2>Refund ticket for </h2>
 
 @using (@Html.BeginForm("RefundTicketSave", "Ticket"))
 {
     <div class="form-group">
-        @Html.LabelFor(p => p.Customer.Id)
-        @Html.TextBoxFor(p => p.Customer.Id, new { @class = "form-control" })
+        @Html.LabelFor(p => p.Ticket.Id)
+        @Html.TextBoxFor(p => p.Ticket.Id, new { @class = "form-control" })
     </div>
     <div class="form-group">
         @Html.LabelFor(p => p.Customer.FirstName)
@@ -24,8 +24,6 @@
         @Html.LabelFor(p => p.Customer.Email)
         @Html.TextBoxFor(p => p.Customer.Email, new { @class = "form-control" })
     </div>
-    Model.Customer.EventId = Model.Event.Id;
-    @Html.HiddenFor(e => e.Customer.EventId)
     <button type="submit" class="btn">Refund Ticket</button>
 }
 

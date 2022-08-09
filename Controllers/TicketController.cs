@@ -6,105 +6,101 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using EventsApplication.Service;
 
 namespace EventsApplication.Controllers
 {
+    // Robic kilka metod GetCusomerId(), GetCustomerList();
     public class TicketController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly EventService _eventService;
+        private readonly ICustomerService _customerService;
+
+        public TicketController(ICustomerService customerService, ApplicationDbContext applicationDbContext)
+        {
+            _customerService = customerService;
+            _dbContext = applicationDbContext;
+        }
 
         public TicketController()
         {
             _dbContext = new ApplicationDbContext();
+            _eventService = new EventService();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            _dbContext.Dispose();
-        }
-        
         public ActionResult TicketList(int Id)
         {
 
-            var events = _dbContext.Events.Single(e => e.Id == Id);
-            var customers = _dbContext.Customers.ToList();
-            
-            var viewModel = new BuyTicketFormViewModel
+            var tickets = _dbContext.Tickets
+                .Include(t => t.Customer)
+                .Include(t => t.Event)
+                .Where(t => t.Event.Id == Id);
+            var events = _dbContext.Events.FirstOrDefault(e => e.Id == Id);
+            var viewModel = new TicketListViewModel
             {
-                Customers = customers,
-                Event = events,
+                Tickets = tickets,
+                Event = events
             };
-            return View(viewModel);
+            return View("TicketList", viewModel);
         }
+
         public ActionResult BuyTicket(int Id)
         {
-            var events = _dbContext.Events.SingleOrDefault(e => e.Id == Id);
+            var events = _dbContext.Events.FirstOrDefault(e => e.Id == Id);
+
             var viewModel = new BuyTicketFormViewModel
             {
                 Event = events,
+                Ticket = new Ticket(),
                 Customer = new Customer()
             };
+
             return View("BuyTicketForm", viewModel);
         }
-
         [HttpPost]
-        public ActionResult BuyTicketSave(Customer Customer)
+        public ActionResult BuyTicketSave(BuyTicketFormViewModel buyTicketFormViewModel)
         {
-            var eventsInDb = _dbContext.Events.SingleOrDefault(e => e.Id == Customer.EventId);
+            var eventsInDb = _dbContext.Events.FirstOrDefault(e => e.Id == buyTicketFormViewModel.Event.Id);
 
-            if (Customer.Id == 0)
+            buyTicketFormViewModel.Ticket.Event = eventsInDb;
+
+            if (buyTicketFormViewModel.Ticket.Customer.Id == 0)
             {
-                _dbContext.Customers.Add(Customer);
+                _dbContext.Customers.Add(buyTicketFormViewModel.Ticket.Customer);
             }
-           
+
             eventsInDb.Tickets--;
+            _dbContext.Tickets.Add(buyTicketFormViewModel.Ticket);
             _dbContext.SaveChanges();
 
             return RedirectToAction("Index", "Event");
         }
-
-        public ActionResult RefundTicket(int Id)
+        public ActionResult RefundTicket()
         {
-            var events = _dbContext.Events.Single(e => e.Id == Id);
-
-            if (events == null)
-                return new EmptyResult();
-
-            var viewModel = new BuyTicketFormViewModel
-            {
-                Customer = new Customer(),
-                Event = events,
-            };
-
-            return View("RefundTicketForm", viewModel);
-
+            return View("RefundTicketForm");
         }
 
         [HttpPost]
-        public ActionResult RefundTicketSave(Customer Customer)
+        public ActionResult RefundTicketSave(ReturnTicketFormViewModel returnTicketFormViewModel)
         {
-            var CustomersInDb = _dbContext.Customers.ToList();
-            var CustomerInDb = CustomersInDb.Single(c => c.Id == Customer.Id);
-            var events = _dbContext.Events.SingleOrDefault(e => e.Id == Customer.EventId);
 
-            if (CustomerInDb == null)
+            var ticket = _dbContext.Tickets
+                .Include(t => t.Event)
+                .Include(t => t.Customer)
+                .FirstOrDefault(c => c.Id == returnTicketFormViewModel.Ticket.Id);
+
+            if (returnTicketFormViewModel.Customer.FirstName == ticket.Customer.FirstName &&
+                returnTicketFormViewModel.Customer.LastName == ticket.Customer.LastName &&
+                returnTicketFormViewModel.Customer.Email == ticket.Customer.Email)
             {
-                Console.WriteLine("Nie ma takiego Id");
-            }
-            if(CustomerInDb.Email == Customer.Email && CustomerInDb.FirstName == Customer.FirstName && CustomerInDb.LastName == Customer.LastName)
-            {
-                _dbContext.Customers.Remove(CustomerInDb);
-                events.Tickets++;
+                ticket.Event.Tickets++;
+                _dbContext.Customers.Remove(ticket.Customer);
+                _dbContext.Tickets.Remove(ticket);
                 _dbContext.SaveChanges();
-            } else
-            {
-                Console.WriteLine("Nie poprawne dane");
             }
-            
 
             return RedirectToAction("Index", "Event");
         }
-
-        
     }
 }

@@ -1,9 +1,9 @@
 ﻿@model EventsApplication.ViewModel.EventFormViewModel
 @{
-    ViewBag.Title = Model.Title;
+    ViewBag.Title = Model.Event.Name;
 }
 
-<h1>@Model.Title</h1>
+@*<h1>@Model.Event.Name</h1>*@
 
 @using (Html.BeginForm("Save", "Event"))
 {

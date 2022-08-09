@@ -23,7 +23,7 @@ namespace EventsApplication.Models
 
         public DbSet<Event> Events { get; set; }
         public DbSet<Customer> Customers { get; set; }
-
+        public DbSet<Ticket> Tickets { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

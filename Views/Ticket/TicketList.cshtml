@@ -1,4 +1,4 @@
-﻿@model EventsApplication.ViewModel.BuyTicketFormViewModel
+﻿@model EventsApplication.ViewModel.TicketListViewModel
 @{
     ViewBag.Title = "TicketList";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,23 +18,16 @@
     </thead>
     <tbody>
 
-
-        @foreach (var p in Model.Customers)
-        {
-            if (p.EventId == Model.Event.Id)
+        @foreach (var t in Model.Tickets)
             {
                 <tr>
-                    <td>@p.FirstName</td>
-                    <td>@p.LastName</td>
-                    <td>@p.Email</td>
-                    <td>@p.IsRegistered.HasValue</td>
-                    <td>@p.Id</td>
-
+                    <td>@t.Customer.FirstName</td>
+                    <td>@t.Customer.LastName</td>
+                    <td>@t.Customer.Email</td>
+                    <td>@t.Customer.IsRegistered</td>
+                    <td>@t.Id</td>
                 </tr>
             }
-
-        }
-
 
     </tbody>
 </table>

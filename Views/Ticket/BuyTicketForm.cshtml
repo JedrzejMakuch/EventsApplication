@@ -10,18 +10,18 @@
 {
 
     <div class="form-group">
-        @Html.LabelFor(p => p.Customer.FirstName)
-        @Html.TextBoxFor(p => p.Customer.FirstName, new { @class = "form-control" })
+        @Html.LabelFor(p => p.Ticket.Customer.FirstName)
+        @Html.TextBoxFor(p => p.Ticket.Customer.FirstName, new { @class = "form-control" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(p => p.Customer.LastName)
-        @Html.TextBoxFor(p => p.Customer.LastName, new { @class = "form-control" })
+        @Html.LabelFor(p => p.Ticket.Customer.LastName)
+        @Html.TextBoxFor(p => p.Ticket.Customer.LastName, new { @class = "form-control" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(p => p.Customer.Email)
-        @Html.TextBoxFor(p => p.Customer.Email, new { @class = "form-control" })
+        @Html.LabelFor(p => p.Ticket.Customer.Email)
+        @Html.TextBoxFor(p => p.Ticket.Customer.Email, new { @class = "form-control" })
     </div>
-    Model.Customer.EventId = Model.Event.Id;
-    @Html.HiddenFor(e => e.Customer.EventId)
+   
+    @Html.HiddenFor(model => model.Event.Id)
     <button type="submit" class="btn">Buy Ticket</button>
 }

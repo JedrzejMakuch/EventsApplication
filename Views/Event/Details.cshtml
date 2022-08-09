@@ -11,5 +11,4 @@
 <p>Description: @Model.Description</p>
 <p>Tickets left: @Model.Tickets</p>
 <button type="submit" class="btn">@Html.ActionLink("Buy ticket", "BuyTicket", "Ticket", new { Id = Model.Id }, null)</button>
-<button type="submit" class="btn">@Html.ActionLink("Refund ticket", "RefundTicket", "Ticket", new { Id = Model.Id }, null)</button>
 <button type="submit" class="btn">@Html.ActionLink("Ticket List", "TicketList", "Ticket", new { Id = Model.Id }, null)</button>

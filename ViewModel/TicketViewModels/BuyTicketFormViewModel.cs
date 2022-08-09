@@ -6,21 +6,11 @@ using System.Web;
 
 namespace EventsApplication.ViewModel
 {
-    public class EventFormViewModel
+    public class BuyTicketFormViewModel
     {
+        public IEnumerable<Customer> Customers { get; set; }
         public Event Event { get; set; }
         public Customer Customer { get; set; }
-
-        public string Title
-        {
-            get
-            {
-                if (Event != null && Event.Id != 0)
-                    return "Edit Event";
-
-                return "New Event";
-            }
-        }
-
+        public Ticket Ticket { get; set; }  
     }
 }

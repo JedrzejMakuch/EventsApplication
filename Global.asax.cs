@@ -1,3 +1,7 @@
+using Autofac;
+using Autofac.Integration.Mvc;
+using EventsApplication.Models;
+using EventsApplication.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +20,16 @@ namespace EventsApplication
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var builder = new ContainerBuilder();
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterType<ApplicationDbContext>().AsSelf();
+            builder.RegisterType<CustomerService>().As<ICustomerService>();
+
+
+            var container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+           
         }
     }
 }

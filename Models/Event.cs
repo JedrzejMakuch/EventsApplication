@@ -15,6 +15,6 @@ namespace EventsApplication.Models
         public DateTime? DateOfStart { get; set; }
         public DateTime? DateOfEnd { get; set; }
         public int Tickets { get; set; }
-        public string Location { get; set; }    
+        public string Location { get; set; }
     }
 }

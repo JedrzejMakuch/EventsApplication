@@ -1,4 +1,6 @@
-﻿using Microsoft.Owin;
+﻿using Autofac;
+using EventsApplication.Service;
+using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(EventsApplication.Startup))]
@@ -10,5 +12,6 @@ namespace EventsApplication
         {
             ConfigureAuth(app);
         }
+        
     }
 }
