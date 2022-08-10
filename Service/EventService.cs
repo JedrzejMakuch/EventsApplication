@@ -29,6 +29,7 @@ namespace EventsApplication.Service
 
         public void SaveNewEditEvent(EventFormViewModel newEventFormViewModel)
         {
+
             if (newEventFormViewModel.Event.Id == 0)
                 _dbContext.Events.Add(newEventFormViewModel.Event);
             else
@@ -39,7 +40,9 @@ namespace EventsApplication.Service
                 eventInDb.Tickets = newEventFormViewModel.Event.Tickets;
                 eventInDb.DateOfStart = newEventFormViewModel.Event.DateOfStart;
                 eventInDb.DateOfEnd = newEventFormViewModel.Event.DateOfEnd;
+
             }
+
             _dbContext.SaveChanges();
         }
 

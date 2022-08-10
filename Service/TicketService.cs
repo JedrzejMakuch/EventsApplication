@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Data.Entity;
 using EventsApplication.ViewModel;
-using System.Web.Mvc;
 
 namespace EventsApplication.Service
 {
@@ -49,7 +48,6 @@ namespace EventsApplication.Service
 
                 buyTicketFormViewModel.Ticket.Event.Tickets--;
                 _dbContext.Tickets.Add(buyTicketFormViewModel.Ticket);
-
                 _dbContext.SaveChanges();
 
             }

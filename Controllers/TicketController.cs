@@ -9,10 +9,7 @@ namespace EventsApplication.Controllers
         private readonly ICustomerService _customerService;
         private readonly ITicketService _ticketService;
         private readonly IEventService _eventService;
-        public TicketController()
-        {
-
-        }
+     
         public TicketController(ICustomerService customerService, ITicketService ticketService, IEventService eventService)
         {
             _customerService = customerService;
@@ -42,6 +39,7 @@ namespace EventsApplication.Controllers
             return View("BuyTicketForm", viewModel);
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult BuyTicketSave(BuyTicketFormViewModel buyTicketFormViewModel)
         {

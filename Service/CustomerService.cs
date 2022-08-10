@@ -1,10 +1,7 @@
 ﻿using EventsApplication.Models;
 using EventsApplication.ViewModel;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 
 namespace EventsApplication.Service
 {
@@ -34,8 +31,8 @@ namespace EventsApplication.Service
         public bool ValidateCustomer(ReturnTicketFormViewModel returnTicketFormViewModel, Ticket ticket)
         {
             return returnTicketFormViewModel.Customer.FirstName == ticket.Customer.FirstName &&
-                            returnTicketFormViewModel.Customer.LastName == ticket.Customer.LastName &&
-                            returnTicketFormViewModel.Customer.Email == ticket.Customer.Email;
+                   returnTicketFormViewModel.Customer.LastName == ticket.Customer.LastName &&
+                   returnTicketFormViewModel.Customer.Email == ticket.Customer.Email;
         }
 
     

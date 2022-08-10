@@ -3,35 +3,42 @@
     ViewBag.Title = Model.Event.Name;
 }
 
-@*<h1>@Model.Event.Name</h1>*@
-
 @using (Html.BeginForm("Save", "Event"))
 {
+
+    @Html.ValidationSummary(true, "Please fix the following errors.")
     <div class="form-group">
         @Html.LabelFor(m => m.Event.Name)
         @Html.TextBoxFor(m => m.Event.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Event.Name)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Event.DateOfStart)
         @Html.TextBoxFor(m => m.Event.DateOfStart, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Event.DateOfStart)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Event.DateOfEnd)
         @Html.TextBoxFor(m => m.Event.DateOfEnd, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Event.DateOfEnd)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Event.Description)
         @Html.TextAreaFor(m => m.Event.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Event.Description)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Event.Location)
         @Html.TextBoxFor(m => m.Event.Location, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Event.Location)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Event.Tickets)
         @Html.TextBoxFor(m => m.Event.Tickets, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Event.Tickets)
     </div>
     @Html.HiddenFor(m => m.Event.Id)
+    @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
 
 }

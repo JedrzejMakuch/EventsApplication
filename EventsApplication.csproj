@@ -277,6 +277,18 @@
     <Compile Include="Migrations\202208090747245_UpdateTicketModelWithCustomerAndEventModelsVol2.designer.cs">
       <DependentUpon>202208090747245_UpdateTicketModelWithCustomerAndEventModelsVol2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208100828115_UpdateModelsWithValidation.cs" />
+    <Compile Include="Migrations\202208100828115_UpdateModelsWithValidation.designer.cs">
+      <DependentUpon>202208100828115_UpdateModelsWithValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208100853092_UpdatingEvendAndCustomerEvent.cs" />
+    <Compile Include="Migrations\202208100853092_UpdatingEvendAndCustomerEvent.designer.cs">
+      <DependentUpon>202208100853092_UpdatingEvendAndCustomerEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208100904105_UpdatingEvendAndCustomerEventV2.cs" />
+    <Compile Include="Migrations\202208100904105_UpdatingEvendAndCustomerEventV2.designer.cs">
+      <DependentUpon>202208100904105_UpdatingEvendAndCustomerEventV2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Event.cs" />
@@ -428,6 +440,21 @@
     <EmbeddedResource Include="Migrations\202208090747245_UpdateTicketModelWithCustomerAndEventModelsVol2.resx">
       <DependentUpon>202208090747245_UpdateTicketModelWithCustomerAndEventModelsVol2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208100828115_UpdateModelsWithValidation.resx">
+      <DependentUpon>202208100828115_UpdateModelsWithValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208100853092_UpdatingEvendAndCustomerEvent.resx">
+      <DependentUpon>202208100853092_UpdatingEvendAndCustomerEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208100904105_UpdatingEvendAndCustomerEventV2.resx">
+      <DependentUpon>202208100904105_UpdatingEvendAndCustomerEventV2.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Events\Events.csproj">
+      <Project>{f8314361-32a0-4f9b-867b-89fc1a61ff3a}</Project>
+      <Name>Events</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

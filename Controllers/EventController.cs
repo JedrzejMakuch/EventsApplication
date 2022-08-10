@@ -43,6 +43,7 @@ namespace EventsApplication.Controllers
             return View("EventForm", viewModel);
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Save(EventFormViewModel newEventFormViewModel)
         {
