@@ -30,9 +30,9 @@ namespace EventsApplication.Service
 
         public bool ValidateCustomer(ReturnTicketFormViewModel returnTicketFormViewModel, Ticket ticket)
         {
-            return returnTicketFormViewModel.Customer.FirstName == ticket.Customer.FirstName &&
-                   returnTicketFormViewModel.Customer.LastName == ticket.Customer.LastName &&
-                   returnTicketFormViewModel.Customer.Email == ticket.Customer.Email;
+            return returnTicketFormViewModel.FirstName == ticket.Customer.FirstName &&
+                   returnTicketFormViewModel.LastName == ticket.Customer.LastName &&
+                   returnTicketFormViewModel.Email == ticket.Customer.Email;
         }
 
     

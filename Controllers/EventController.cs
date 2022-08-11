@@ -1,5 +1,6 @@
 ﻿using EventsApplication.Service;
 using EventsApplication.ViewModel;
+using System.Linq;
 using System.Web.Mvc;
 
 
@@ -21,11 +22,7 @@ namespace EventsApplication.Controllers
 
         public ActionResult New()
         {
-            var viewModel = new EventFormViewModel
-            {
-                Event = _eventService.GetNewEvent()
-            };
-            return View("EventForm", viewModel);
+            return View("EventForm");
         }
 
         public ActionResult Details(int Id)
@@ -35,18 +32,21 @@ namespace EventsApplication.Controllers
 
         public ActionResult Edit(int Id)
         {
-            var viewModel = new EventFormViewModel
-            {
-                Event = _eventService.GetEventId(Id),
-            };
+            EventFormViewModel viewModel = _eventService.EditEvent(Id);
 
             return View("EventForm", viewModel);
         }
 
-        [ValidateAntiForgeryToken]
+
         [HttpPost]
         public ActionResult Save(EventFormViewModel newEventFormViewModel)
         {
+            ModelState.Remove("Id");
+            if (!ModelState.IsValid)
+            {
+
+                return View("EventForm");
+            }
             _eventService.SaveNewEditEvent(newEventFormViewModel);
 
             return RedirectToAction("Index", "Event");

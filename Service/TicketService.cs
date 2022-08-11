@@ -34,20 +34,36 @@ namespace EventsApplication.Service
         }
 
         public void BuyTicket(BuyTicketFormViewModel buyTicketFormViewModel, Event eventsInDb)
-        {
+         {
 
             var evnt = _dbContext.Events.FirstOrDefault(e => e.Id == eventsInDb.Id);
             if (evnt != null)
             {
-                buyTicketFormViewModel.Ticket.Event = evnt;
+                
 
-                if (buyTicketFormViewModel.Ticket.Customer.Id == 0)
+                if (buyTicketFormViewModel.CustomerId == 0)
                 {
-                    _dbContext.Customers.Add(buyTicketFormViewModel.Ticket.Customer);
+                    var viewModel = new BuyTicketFormViewModel
+                    {
+                        Ticket = new Ticket
+                        {
+                            Customer = new Customer
+                            {
+                                FirstName = buyTicketFormViewModel.FirstName,
+                                LastName = buyTicketFormViewModel.LastName,
+                                Email = buyTicketFormViewModel.Email,
+                                IsRegistered = null,
+                            },
+                            Event = evnt,
+                          
+                        },
+                       
+                    };
+                     viewModel.Ticket.Event.Tickets--;
+                    _dbContext.Customers.Add(viewModel.Ticket.Customer);
+                    _dbContext.Tickets.Add(viewModel.Ticket);
                 }
 
-                buyTicketFormViewModel.Ticket.Event.Tickets--;
-                _dbContext.Tickets.Add(buyTicketFormViewModel.Ticket);
                 _dbContext.SaveChanges();
 
             }
@@ -63,7 +79,8 @@ namespace EventsApplication.Service
 
         public void RefundTheTicket(ReturnTicketFormViewModel returnTicketFormViewModel)
         {
-            var ticket = GetTicketByEventId(returnTicketFormViewModel.Ticket.Id);
+            // var ticket = GetTicketByEventId(returnTicketFormViewModel.Ticket.Id);
+            var ticket = GetTicketByEventId(returnTicketFormViewModel.Id);
 
             if (_customerService.ValidateCustomer(returnTicketFormViewModel, ticket))
             {

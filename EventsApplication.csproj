@@ -289,6 +289,26 @@
     <Compile Include="Migrations\202208100904105_UpdatingEvendAndCustomerEventV2.designer.cs">
       <DependentUpon>202208100904105_UpdatingEvendAndCustomerEventV2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208111201051_UpdateEventModel.cs" />
+    <Compile Include="Migrations\202208111201051_UpdateEventModel.designer.cs">
+      <DependentUpon>202208111201051_UpdateEventModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208111247079_UpdateModelsWithValidationState.cs" />
+    <Compile Include="Migrations\202208111247079_UpdateModelsWithValidationState.designer.cs">
+      <DependentUpon>202208111247079_UpdateModelsWithValidationState.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208111408232_UpdateEventModelWithValidation.cs" />
+    <Compile Include="Migrations\202208111408232_UpdateEventModelWithValidation.designer.cs">
+      <DependentUpon>202208111408232_UpdateEventModelWithValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208111545358_UpdateCustomerModel.cs" />
+    <Compile Include="Migrations\202208111545358_UpdateCustomerModel.designer.cs">
+      <DependentUpon>202208111545358_UpdateCustomerModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208111822184_UpdateTicketModel.cs" />
+    <Compile Include="Migrations\202208111822184_UpdateTicketModel.designer.cs">
+      <DependentUpon>202208111822184_UpdateTicketModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Event.cs" />
@@ -448,6 +468,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208100904105_UpdatingEvendAndCustomerEventV2.resx">
       <DependentUpon>202208100904105_UpdatingEvendAndCustomerEventV2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208111201051_UpdateEventModel.resx">
+      <DependentUpon>202208111201051_UpdateEventModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208111247079_UpdateModelsWithValidationState.resx">
+      <DependentUpon>202208111247079_UpdateModelsWithValidationState.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208111408232_UpdateEventModelWithValidation.resx">
+      <DependentUpon>202208111408232_UpdateEventModelWithValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208111545358_UpdateCustomerModel.resx">
+      <DependentUpon>202208111545358_UpdateCustomerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208111822184_UpdateTicketModel.resx">
+      <DependentUpon>202208111822184_UpdateTicketModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

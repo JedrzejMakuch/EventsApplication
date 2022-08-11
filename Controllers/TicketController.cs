@@ -1,6 +1,7 @@
 ﻿using EventsApplication.ViewModel;
 using System.Web.Mvc;
 using EventsApplication.Service;
+using EventsApplication.Models;
 
 namespace EventsApplication.Controllers
 {
@@ -22,7 +23,8 @@ namespace EventsApplication.Controllers
             var viewModel = new TicketListViewModel
             {
                 Tickets = _ticketService.GetTicketWithIncludedCustomer(Id),
-                Event = _eventService.GetEventId(Id)
+                EventId = _eventService.GetEventId(Id).Id,
+                Name = _eventService.GetEventId(Id).Name
             };
             return View("TicketList", viewModel);
         }
@@ -31,19 +33,23 @@ namespace EventsApplication.Controllers
         {
             var viewModel = new BuyTicketFormViewModel
             {
-                Event = _eventService.GetEventId(Id),
+                EventId = _eventService.GetEventId(Id).Id,
                 Ticket = _ticketService.GetNewTicket(),
-                Customer = _customerService.GetNewCustomer()
             };
 
             return View("BuyTicketForm", viewModel);
         }
 
-        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult BuyTicketSave(BuyTicketFormViewModel buyTicketFormViewModel)
         {
-            _ticketService.BuyTicket(buyTicketFormViewModel, _eventService.GetEventId(buyTicketFormViewModel.Event.Id));
+            ModelState.Remove("Id");
+            if (!ModelState.IsValid)
+            {
+
+                return View("BuyTicketForm");
+            }
+            _ticketService.BuyTicket(buyTicketFormViewModel, _eventService.GetEventId(buyTicketFormViewModel.EventId));
 
             return RedirectToAction("Index", "Event");
         }
@@ -56,6 +62,11 @@ namespace EventsApplication.Controllers
         [HttpPost]
         public ActionResult RefundTicketSave(ReturnTicketFormViewModel returnTicketFormViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+
+                return View("RefundTicketForm");
+            }
             _ticketService.RefundTheTicket(returnTicketFormViewModel);
 
             return RedirectToAction("Index", "Event");

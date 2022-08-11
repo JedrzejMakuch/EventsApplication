@@ -9,20 +9,24 @@
 @using (@Html.BeginForm("RefundTicketSave", "Ticket"))
 {
     <div class="form-group">
-        @Html.LabelFor(p => p.Ticket.Id)
-        @Html.TextBoxFor(p => p.Ticket.Id, new { @class = "form-control" })
+        @Html.LabelFor(p => p.Id)
+        @Html.TextBoxFor(p => p.Id, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Id)
     </div>
     <div class="form-group">
-        @Html.LabelFor(p => p.Customer.FirstName)
-        @Html.TextBoxFor(p => p.Customer.FirstName, new { @class = "form-control" })
+        @Html.LabelFor(p => p.FirstName)
+        @Html.TextBoxFor(p => p.FirstName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.FirstName)
     </div>
     <div class="form-group">
-        @Html.LabelFor(p => p.Customer.LastName)
-        @Html.TextBoxFor(p => p.Customer.LastName, new { @class = "form-control" })
+        @Html.LabelFor(p => p.LastName)
+        @Html.TextBoxFor(p => p.LastName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.LastName)
     </div>
     <div class="form-group">
-        @Html.LabelFor(p => p.Customer.Email)
-        @Html.TextBoxFor(p => p.Customer.Email, new { @class = "form-control" })
+        @Html.LabelFor(p => p.Email)
+        @Html.TextBoxFor(p => p.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Email)
     </div>
     <button type="submit" class="btn">Refund Ticket</button>
 }

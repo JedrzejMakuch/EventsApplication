@@ -8,9 +8,8 @@ namespace EventsApplication.ViewModel
 {
     public class TicketListViewModel
     {
-        public Event Event { get; set; }    
-        
-        public Customer Customer { get; set; }
+        public int EventId { get; set; }
+        public string Name { get; set; }
         public IEnumerable<Ticket> Tickets { get; set; }
     }
 }

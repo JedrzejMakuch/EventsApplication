@@ -12,8 +12,8 @@ namespace EventsApplication.Service
     {
         Event GetEventId(int Id);
         IEnumerable<Event> GetEventList();
-        Event GetNewEvent();
         void SaveNewEditEvent(EventFormViewModel newEventFormViewModel);
         void DeleteEvent(int Id);
+        EventFormViewModel EditEvent(int Id);
     }
 }

@@ -13,10 +13,7 @@ namespace EventsApplication.Service
         {
             _dbContext = dbContext;
         }
-        public Event GetNewEvent()
-        {
-            return new Event();
-        }
+       
         public IEnumerable<Event> GetEventList()
         {
             return _dbContext.Events.ToList();
@@ -24,22 +21,35 @@ namespace EventsApplication.Service
 
         public Event GetEventId(int Id)
         {
-            return _dbContext.Events.FirstOrDefault(c => c.Id == Id);
+            return _dbContext.Events.SingleOrDefault(c => c.Id == Id);
         }
 
         public void SaveNewEditEvent(EventFormViewModel newEventFormViewModel)
         {
 
-            if (newEventFormViewModel.Event.Id == 0)
-                _dbContext.Events.Add(newEventFormViewModel.Event);
+            if (newEventFormViewModel.Id == 0)
+            {
+                var events = new Event
+                {
+                    Id = newEventFormViewModel.Id,
+                    Name = newEventFormViewModel.Name,
+                    Description = newEventFormViewModel.Description,
+                    DateOfStart = newEventFormViewModel.DateOfStart,
+                    DateOfEnd = newEventFormViewModel.DateOfEnd,
+                    Location = newEventFormViewModel.Location,
+                    Tickets = newEventFormViewModel.Tickets,
+                };
+                _dbContext.Events.Add(events);
+            }
             else
             {
-                var eventInDb = _dbContext.Events.Single(e => e.Id == newEventFormViewModel.Event.Id);
-                eventInDb.Name = newEventFormViewModel.Event.Name;
-                eventInDb.Description = newEventFormViewModel.Event.Description;
-                eventInDb.Tickets = newEventFormViewModel.Event.Tickets;
-                eventInDb.DateOfStart = newEventFormViewModel.Event.DateOfStart;
-                eventInDb.DateOfEnd = newEventFormViewModel.Event.DateOfEnd;
+                var eventInDb = _dbContext.Events.Single(e => e.Id == newEventFormViewModel.Id);
+                eventInDb.Name = newEventFormViewModel.Name;
+                eventInDb.Description = newEventFormViewModel.Description;
+                eventInDb.Tickets = newEventFormViewModel.Tickets;
+                eventInDb.DateOfStart = newEventFormViewModel.DateOfStart;
+                eventInDb.DateOfEnd = newEventFormViewModel.DateOfEnd;
+                eventInDb.Location = newEventFormViewModel.Location;
 
             }
 
@@ -58,6 +68,22 @@ namespace EventsApplication.Service
 
             _dbContext.Events.Remove(events);
             _dbContext.SaveChanges();
+        }
+        public EventFormViewModel EditEvent(int Id)
+        {
+            var events = GetEventId(Id);
+
+            var viewModel = new EventFormViewModel
+            {
+                Id = events.Id,
+                Name = events.Name,
+                Description = events.Description,
+                DateOfStart = events.DateOfStart,
+                DateOfEnd = events.DateOfEnd,
+                Location = events.Location,
+                Tickets = events.Tickets,
+            };
+            return viewModel;
         }
     }
 }
