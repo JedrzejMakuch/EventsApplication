@@ -1,19 +1,17 @@
-﻿using EventsApplication.ViewModel;
+﻿using EventsLibrary.ViewModel;
 using System.Web.Mvc;
-using EventsApplication.Service;
-using EventsApplication.Models;
+using EventsLibrary.Service;
+using EventsLibrary.Models;
 
 namespace EventsApplication.Controllers
 {
     public class TicketController : Controller
     {
-        private readonly ICustomerService _customerService;
         private readonly ITicketService _ticketService;
         private readonly IEventService _eventService;
      
-        public TicketController(ICustomerService customerService, ITicketService ticketService, IEventService eventService)
+        public TicketController(ITicketService ticketService, IEventService eventService)
         {
-            _customerService = customerService;
             _ticketService = ticketService;
             _eventService = eventService;
         }
@@ -49,7 +47,7 @@ namespace EventsApplication.Controllers
 
                 return View("BuyTicketForm");
             }
-            _ticketService.BuyTicket(buyTicketFormViewModel, _eventService.GetEventId(buyTicketFormViewModel.EventId));
+            _ticketService.BuyTicket(buyTicketFormViewModel, buyTicketFormViewModel.EventId);
 
             return RedirectToAction("Index", "Event");
         }

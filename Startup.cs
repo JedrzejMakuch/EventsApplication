@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using EventsApplication.Service;
+using EventsLibrary.Service;
 using Microsoft.Owin;
 using Owin;
 

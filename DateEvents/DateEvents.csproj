@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B55E396D-C756-46D6-8100-4C227922AF17}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DateEvents</RootNamespace>
+    <AssemblyName>DateEvents</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Migrations\202207301149005_InitialModel.cs" />
+    <Compile Include="Migrations\202207301149005_InitialModel.Designer.cs">
+      <DependentUpon>202207301149005_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207301235345_AddingLocationToEventModel.cs" />
+    <Compile Include="Migrations\202207301235345_AddingLocationToEventModel.Designer.cs">
+      <DependentUpon>202207301235345_AddingLocationToEventModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207311903012_AddingEventPropertiesToCustomerModel.cs" />
+    <Compile Include="Migrations\202207311903012_AddingEventPropertiesToCustomerModel.Designer.cs">
+      <DependentUpon>202207311903012_AddingEventPropertiesToCustomerModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207311924445_RemoveEventFromCustomerModel.cs" />
+    <Compile Include="Migrations\202207311924445_RemoveEventFromCustomerModel.Designer.cs">
+      <DependentUpon>202207311924445_RemoveEventFromCustomerModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207311945281_RemoveEventFromCustomerModel1.cs" />
+    <Compile Include="Migrations\202207311945281_RemoveEventFromCustomerModel1.Designer.cs">
+      <DependentUpon>202207311945281_RemoveEventFromCustomerModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207311958441_AddingEventIdToCustomerModel.cs" />
+    <Compile Include="Migrations\202207311958441_AddingEventIdToCustomerModel.Designer.cs">
+      <DependentUpon>202207311958441_AddingEventIdToCustomerModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208011840473_AddingTicketNumberToCustomerModel.cs" />
+    <Compile Include="Migrations\202208011840473_AddingTicketNumberToCustomerModel.Designer.cs">
+      <DependentUpon>202208011840473_AddingTicketNumberToCustomerModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208011930026_AddingNullableToEventIdInCustomerModelRemoveTicketsNumberFromCustomerModel.cs" />
+    <Compile Include="Migrations\202208011930026_AddingNullableToEventIdInCustomerModelRemoveTicketsNumberFromCustomerModel.Designer.cs">
+      <DependentUpon>202208011930026_AddingNullableToEventIdInCustomerModelRemoveTicketsNumberFromCustomerModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208080552537_RemovingNullableFromEventIdInCustomerModel.cs" />
+    <Compile Include="Migrations\202208080552537_RemovingNullableFromEventIdInCustomerModel.Designer.cs">
+      <DependentUpon>202208080552537_RemovingNullableFromEventIdInCustomerModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208081238253_AddTicketModel.cs" />
+    <Compile Include="Migrations\202208081238253_AddTicketModel.Designer.cs">
+      <DependentUpon>202208081238253_AddTicketModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208081243484_UpdateModelsWithTicketsId.cs" />
+    <Compile Include="Migrations\202208081243484_UpdateModelsWithTicketsId.Designer.cs">
+      <DependentUpon>202208081243484_UpdateModelsWithTicketsId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208081253026_UpdateModelCustomer.cs" />
+    <Compile Include="Migrations\202208081253026_UpdateModelCustomer.Designer.cs">
+      <DependentUpon>202208081253026_UpdateModelCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208081433095_updateModels.cs" />
+    <Compile Include="Migrations\202208081433095_updateModels.Designer.cs">
+      <DependentUpon>202208081433095_updateModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208090709137_UpdateingTicketModel.cs" />
+    <Compile Include="Migrations\202208090709137_UpdateingTicketModel.Designer.cs">
+      <DependentUpon>202208090709137_UpdateingTicketModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208090713449_UpdateTicketModelVol2.cs" />
+    <Compile Include="Migrations\202208090713449_UpdateTicketModelVol2.Designer.cs">
+      <DependentUpon>202208090713449_UpdateTicketModelVol2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208090725081_UpdateTicketModelWithCustomerId.cs" />
+    <Compile Include="Migrations\202208090725081_UpdateTicketModelWithCustomerId.Designer.cs">
+      <DependentUpon>202208090725081_UpdateTicketModelWithCustomerId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208090737212_UpdateTicketModelWithCustomerAndEventModels.cs" />
+    <Compile Include="Migrations\202208090737212_UpdateTicketModelWithCustomerAndEventModels.Designer.cs">
+      <DependentUpon>202208090737212_UpdateTicketModelWithCustomerAndEventModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208090747245_UpdateTicketModelWithCustomerAndEventModelsVol2.cs" />
+    <Compile Include="Migrations\202208090747245_UpdateTicketModelWithCustomerAndEventModelsVol2.Designer.cs">
+      <DependentUpon>202208090747245_UpdateTicketModelWithCustomerAndEventModelsVol2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208100828115_UpdateModelsWithValidation.cs" />
+    <Compile Include="Migrations\202208100828115_UpdateModelsWithValidation.Designer.cs">
+      <DependentUpon>202208100828115_UpdateModelsWithValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208100853092_UpdatingEvendAndCustomerEvent.cs" />
+    <Compile Include="Migrations\202208100853092_UpdatingEvendAndCustomerEvent.Designer.cs">
+      <DependentUpon>202208100853092_UpdatingEvendAndCustomerEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208100904105_UpdatingEvendAndCustomerEventV2.cs" />
+    <Compile Include="Migrations\202208100904105_UpdatingEvendAndCustomerEventV2.Designer.cs">
+      <DependentUpon>202208100904105_UpdatingEvendAndCustomerEventV2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208111201051_UpdateEventModel.cs" />
+    <Compile Include="Migrations\202208111201051_UpdateEventModel.Designer.cs">
+      <DependentUpon>202208111201051_UpdateEventModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208111247079_UpdateModelsWithValidationState.cs" />
+    <Compile Include="Migrations\202208111247079_UpdateModelsWithValidationState.Designer.cs">
+      <DependentUpon>202208111247079_UpdateModelsWithValidationState.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208111408232_UpdateEventModelWithValidation.cs" />
+    <Compile Include="Migrations\202208111408232_UpdateEventModelWithValidation.Designer.cs">
+      <DependentUpon>202208111408232_UpdateEventModelWithValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208111545358_UpdateCustomerModel.cs" />
+    <Compile Include="Migrations\202208111545358_UpdateCustomerModel.Designer.cs">
+      <DependentUpon>202208111545358_UpdateCustomerModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208111822184_UpdateTicketModel.cs" />
+    <Compile Include="Migrations\202208111822184_UpdateTicketModel.Designer.cs">
+      <DependentUpon>202208111822184_UpdateTicketModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202207301149005_InitialModel.resx">
+      <DependentUpon>202207301149005_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207301235345_AddingLocationToEventModel.resx">
+      <DependentUpon>202207301235345_AddingLocationToEventModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207311903012_AddingEventPropertiesToCustomerModel.resx">
+      <DependentUpon>202207311903012_AddingEventPropertiesToCustomerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207311924445_RemoveEventFromCustomerModel.resx">
+      <DependentUpon>202207311924445_RemoveEventFromCustomerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207311945281_RemoveEventFromCustomerModel1.resx">
+      <DependentUpon>202207311945281_RemoveEventFromCustomerModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207311958441_AddingEventIdToCustomerModel.resx">
+      <DependentUpon>202207311958441_AddingEventIdToCustomerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208011840473_AddingTicketNumberToCustomerModel.resx">
+      <DependentUpon>202208011840473_AddingTicketNumberToCustomerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208011930026_AddingNullableToEventIdInCustomerModelRemoveTicketsNumberFromCustomerModel.resx">
+      <DependentUpon>202208011930026_AddingNullableToEventIdInCustomerModelRemoveTicketsNumberFromCustomerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208080552537_RemovingNullableFromEventIdInCustomerModel.resx">
+      <DependentUpon>202208080552537_RemovingNullableFromEventIdInCustomerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208081238253_AddTicketModel.resx">
+      <DependentUpon>202208081238253_AddTicketModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208081243484_UpdateModelsWithTicketsId.resx">
+      <DependentUpon>202208081243484_UpdateModelsWithTicketsId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208081253026_UpdateModelCustomer.resx">
+      <DependentUpon>202208081253026_UpdateModelCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208081433095_updateModels.resx">
+      <DependentUpon>202208081433095_updateModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208090709137_UpdateingTicketModel.resx">
+      <DependentUpon>202208090709137_UpdateingTicketModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208090713449_UpdateTicketModelVol2.resx">
+      <DependentUpon>202208090713449_UpdateTicketModelVol2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208090725081_UpdateTicketModelWithCustomerId.resx">
+      <DependentUpon>202208090725081_UpdateTicketModelWithCustomerId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208090737212_UpdateTicketModelWithCustomerAndEventModels.resx">
+      <DependentUpon>202208090737212_UpdateTicketModelWithCustomerAndEventModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208090747245_UpdateTicketModelWithCustomerAndEventModelsVol2.resx">
+      <DependentUpon>202208090747245_UpdateTicketModelWithCustomerAndEventModelsVol2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208100828115_UpdateModelsWithValidation.resx">
+      <DependentUpon>202208100828115_UpdateModelsWithValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208100853092_UpdatingEvendAndCustomerEvent.resx">
+      <DependentUpon>202208100853092_UpdatingEvendAndCustomerEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208100904105_UpdatingEvendAndCustomerEventV2.resx">
+      <DependentUpon>202208100904105_UpdatingEvendAndCustomerEventV2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208111201051_UpdateEventModel.resx">
+      <DependentUpon>202208111201051_UpdateEventModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208111247079_UpdateModelsWithValidationState.resx">
+      <DependentUpon>202208111247079_UpdateModelsWithValidationState.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208111408232_UpdateEventModelWithValidation.resx">
+      <DependentUpon>202208111408232_UpdateEventModelWithValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208111545358_UpdateCustomerModel.resx">
+      <DependentUpon>202208111545358_UpdateCustomerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208111822184_UpdateTicketModel.resx">
+      <DependentUpon>202208111822184_UpdateTicketModel.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.min.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

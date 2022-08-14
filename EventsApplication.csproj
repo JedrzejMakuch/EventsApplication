@@ -310,24 +310,8 @@
       <DependentUpon>202208111822184_UpdateTicketModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\Event.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\CustomerService.cs" />
-    <Compile Include="Service\EventService.cs" />
-    <Compile Include="Service\ICustomerService.cs" />
-    <Compile Include="Service\IEventService.cs" />
-    <Compile Include="Service\ITicketService.cs" />
-    <Compile Include="Service\TicketService.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModel\AccountViewModels.cs" />
-    <Compile Include="ViewModel\TicketViewModels\BuyTicketFormViewModel.cs" />
-    <Compile Include="ViewModel\EventViewModels\EventFormViewModel.cs" />
-    <Compile Include="ViewModel\ManageViewModels.cs" />
-    <Compile Include="ViewModel\TicketViewModels\ReturnTicketFormViewModel.cs" />
-    <Compile Include="ViewModel\TicketViewModels\TicketListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -486,9 +470,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Events\Events.csproj">
-      <Project>{f8314361-32a0-4f9b-867b-89fc1a61ff3a}</Project>
-      <Name>Events</Name>
+    <ProjectReference Include="Events\EventsLibrary.csproj">
+      <Project>{2fd9a65c-5a27-4a43-b510-d0d62cfc90fa}</Project>
+      <Name>EventsLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,4 @@
-﻿@model EventsApplication.Models.Event
+﻿@model EventsLibrary.Models.Event
 @{
     ViewBag.Title = Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,4 +11,6 @@
 <p>Description: @Model.Description</p>
 <p>Tickets left: @Model.Tickets</p>
 <button type="submit" class="btn">@Html.ActionLink("Buy ticket", "BuyTicket", "Ticket", new { Id = Model.Id }, null)</button>
-<button type="submit" class="btn">@Html.ActionLink("Ticket List", "TicketList", "Ticket", new { Id = Model.Id }, null)</button>
+@if (User.IsInRole("Admin"))
+{
+    <button type="submit" class="btn">@Html.ActionLink("Ticket List", "TicketList", "Ticket", new { Id = Model.Id }, null)</button>}

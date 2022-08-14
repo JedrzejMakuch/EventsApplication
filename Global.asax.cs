@@ -1,7 +1,9 @@
 using Autofac;
 using Autofac.Integration.Mvc;
-using EventsApplication.Models;
-using EventsApplication.Service;
+using Events.Repositories;
+using EventsLibrary.Models;
+using EventsLibrary.Service;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +29,10 @@ namespace EventsApplication
             builder.RegisterType<CustomerService>().As<ICustomerService>();
             builder.RegisterType<EventService>().As<IEventService>();
             builder.RegisterType<TicketService>().As<ITicketService>();
+
+            builder.RegisterType<TicketRepository>().As<ITicketRepository>();
+            builder.RegisterType<EventRepository>().As<IEventRepository>();
+            builder.RegisterType<CustomerRepository>().As<ICustomerRepository>();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EventsApplication.Models.Event>
+﻿@model IEnumerable<EventsLibrary.Models.Event>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,8 +21,10 @@
                 <td>@e.Name</td>
                 <td>@e.Tickets</td>
                 <td>@Html.ActionLink("Details", "Details", "Event", new { id = e.Id }, null)</td>
-                <td>@Html.ActionLink("Edit", "Edit", "Event", new {id = e.Id}, null)</td>
-                <td>@Html.ActionLink("Delete", "Delete", "Event", new { id = e.Id }, null)</td>
+                @if (User.IsInRole("Admin"))
+                {
+                <td>@Html.ActionLink("Edit", "Edit", "Event", new { id = e.Id }, null)</td>
+                <td>@Html.ActionLink("Delete", "Delete", "Event", new { id = e.Id }, null)</td>}
             </tr>
         }
     </tbody>
