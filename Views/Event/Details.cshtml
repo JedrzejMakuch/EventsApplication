@@ -1,4 +1,6 @@
-﻿@model EventsLibrary.Models.Event
+﻿@using EventsApplication.ViewModels
+@model EventDetailsViewModel
+
 @{
     ViewBag.Title = Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,11 +8,13 @@
 
 <h3>Details about @Model.Name</h3>
 <br />
-<strong><h4>Name: @Model.Name,  Date: @Model.DateOfStart.ToShortDateString() - @Model.DateOfEnd.ToShortDateString()</h4></strong>
+<h4><strong>Name: @Model.Name, Date: @Model.StartDate.ToShortDateString() - @Model.EndDate.ToShortDateString()</strong></h4>
 <p>Location: @Model.Location</p>
 <p>Description: @Model.Description</p>
-<p>Tickets left: @Model.Tickets</p>
+<p>Tickets left: @Model.TicketsLeft</p>
 <button type="submit" class="btn">@Html.ActionLink("Buy ticket", "BuyTicket", "Ticket", new { Id = Model.Id }, null)</button>
+
 @if (User.IsInRole("Admin"))
 {
-    <button type="submit" class="btn">@Html.ActionLink("Ticket List", "TicketList", "Ticket", new { Id = Model.Id }, null)</button>}
+    <button type="submit" class="btn">@Html.ActionLink("Ticket List", "TicketList", "Ticket", new { Id = Model.Id }, null)</button>
+}

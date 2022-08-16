@@ -312,6 +312,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\EventDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -470,6 +471,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EventsApplication.Services\EventsApplication.Services.csproj">
+      <Project>{2652275E-E31B-4602-B21E-814B1757403D}</Project>
+      <Name>EventsApplication.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="Events\EventsLibrary.csproj">
       <Project>{2fd9a65c-5a27-4a43-b510-d0d62cfc90fa}</Project>
       <Name>EventsLibrary</Name>

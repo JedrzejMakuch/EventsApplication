@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using EventsLibrary.Service;
 using EventsLibrary.Models;
+using EventsApplication.Services.Abstractions;
 
 namespace EventsApplication.Controllers
 {
@@ -21,8 +22,8 @@ namespace EventsApplication.Controllers
             var viewModel = new TicketListViewModel
             {
                 Tickets = _ticketService.GetTicketWithIncludedCustomer(Id),
-                EventId = _eventService.GetEventId(Id).Id,
-                Name = _eventService.GetEventId(Id).Name
+                EventId = _eventService.GetEventById(Id).Id,
+                Name = _eventService.GetEventById(Id).Name
             };
             return View("TicketList", viewModel);
         }
@@ -31,7 +32,7 @@ namespace EventsApplication.Controllers
         {
             var viewModel = new BuyTicketFormViewModel
             {
-                EventId = _eventService.GetEventId(Id).Id,
+                EventId = _eventService.GetEventById(Id).Id,
                 Ticket = _ticketService.GetNewTicket(),
             };
 

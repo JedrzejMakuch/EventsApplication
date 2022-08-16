@@ -5,6 +5,8 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using EventsApplication.ViewModels;
+using EventsApplication.Services.Abstractions;
 
 namespace EventsApplication.Controllers
 {
@@ -21,7 +23,17 @@ namespace EventsApplication.Controllers
 
         public ActionResult Index()
         {
-            return View(_eventService.GetEventList());
+            var events = _eventService.GetEventList();
+            var viewModel = events.Select(e => new EventDetailsViewModel(
+                e.Id,
+                e.Name,
+                e.Description,
+                e.Location,
+                e.StartDate,
+                e.EndDate,
+                e.TicketsLeft));
+
+            return View(viewModel);
         }
 
         // Authorize odpowiada za to, ze musisz byc zalogowany zeby jej uzyc i przenosi Cie do logowania
@@ -42,36 +54,49 @@ namespace EventsApplication.Controllers
         //[AllowAnonymous]
         public ActionResult Details(int Id)
         {
-            return View(_eventService.GetEventId(Id));
+            var eventDetails = _eventService.GetEventById(Id);
+
+            var viewModel = new EventDetailsViewModel(
+                eventDetails.Id,
+                eventDetails.Name,
+                eventDetails.Description,
+                eventDetails.Location,
+                eventDetails.StartDate,
+                eventDetails.EndDate,
+                eventDetails.TicketsLeft);
+            return View(viewModel);
         }
 
         public ActionResult Edit(int Id)
         {
-            EventFormViewModel viewModel = _eventService.EditEvent(Id);
+            //EventFormViewModel viewModel = _eventService.EditEvent(Id);
 
-            return View("EventForm", viewModel);
+            //return View("EventForm", viewModel);
+            return Content("edit");
         }
 
 
         [HttpPost]
         public ActionResult Save(EventFormViewModel newEventFormViewModel)
         {
-            ModelState.Remove("Id");
-            if (!ModelState.IsValid)
-            {
+            //ModelState.Remove("Id");
+            //if (!ModelState.IsValid)
+            //{
 
-                return View("EventForm");
-            }
-            _eventService.SaveNewEditEvent(newEventFormViewModel);
+            //    return View("EventForm");
+            //}
+            //_eventService.SaveNewEditEvent(newEventFormViewModel);
 
-            return RedirectToAction("Index", "Event");
+            //return RedirectToAction("Index", "Event");
+            return Content("save");
         }
 
         public ActionResult Delete(int Id)
         {
-            _eventService.DeleteEvent(Id);
+            //_eventService.DeleteEvent(Id);
 
-            return RedirectToAction("Index", "Event");
+            //return RedirectToAction("Index", "Event");
+            return Content("delete");
         }
 
     }

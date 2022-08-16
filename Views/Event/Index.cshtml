@@ -1,4 +1,6 @@
-﻿@model IEnumerable<EventsLibrary.Models.Event>
+﻿@using EventsApplication.ViewModels
+@model IEnumerable<EventDetailsViewModel>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,7 +21,7 @@
         {
             <tr>
                 <td>@e.Name</td>
-                <td>@e.Tickets</td>
+                <td>@e.TicketsLeft</td>
                 <td>@Html.ActionLink("Details", "Details", "Event", new { id = e.Id }, null)</td>
                 @if (User.IsInRole("Admin"))
                 {
