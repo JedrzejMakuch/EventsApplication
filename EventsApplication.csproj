@@ -471,8 +471,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EventsApplication.Services\EventsApplication.Services.csproj">
-      <Project>{2652275E-E31B-4602-B21E-814B1757403D}</Project>
+    <ProjectReference Include="EventsApplication.Services\EventsApplication.Services.csproj">
+      <Project>{2652275e-e31b-4602-b21e-814b1757403d}</Project>
       <Name>EventsApplication.Services</Name>
     </ProjectReference>
     <ProjectReference Include="Events\EventsLibrary.csproj">

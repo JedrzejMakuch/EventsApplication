@@ -1,8 +1,7 @@
-﻿using EventsLibrary.ViewModel;
-using System.Web.Mvc;
+﻿using EventsApplication.Services.Abstractions;
 using EventsLibrary.Service;
-using EventsLibrary.Models;
-using EventsApplication.Services.Abstractions;
+using EventsLibrary.ViewModel;
+using System.Web.Mvc;
 
 namespace EventsApplication.Controllers
 {

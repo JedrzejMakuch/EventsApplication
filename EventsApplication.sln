@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsApplication", "Events
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsLibrary", "Events\EventsLibrary.csproj", "{2FD9A65C-5A27-4A43-B510-D0D62CFC90FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsApplication.Services", "..\EventsApplication.Services\EventsApplication.Services.csproj", "{2652275E-E31B-4602-B21E-814B1757403D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsApplication.Services", "EventsApplication.Services\EventsApplication.Services.csproj", "{2652275E-E31B-4602-B21E-814B1757403D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

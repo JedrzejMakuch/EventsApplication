@@ -1,10 +1,6 @@
-﻿using EventsLibrary.Service;
-using EventsLibrary.ViewModel;
+﻿using EventsLibrary.ViewModel;
 using System.Linq;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
 using EventsApplication.ViewModels;
 using EventsApplication.Services.Abstractions;
 
