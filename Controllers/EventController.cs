@@ -1,17 +1,15 @@
-﻿using EventsLibrary.ViewModel;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using EventsApplication.ViewModels;
 using EventsApplication.Services.Abstractions;
+using EventsApplication.Services.Models;
 
 namespace EventsApplication.Controllers
 {
-    // Mozna zastosowac przed kontrolerem zeby wszystkie akcje w kontrolerze byly chronione logowaniem
-    //[Authorize]
     public class EventController : Controller
     {
         private readonly IEventService _eventService;
-
+    
         public EventController(IEventService eventService)
         {
             _eventService = eventService;
@@ -32,22 +30,11 @@ namespace EventsApplication.Controllers
             return View(viewModel);
         }
 
-        // Authorize odpowiada za to, ze musisz byc zalogowany zeby jej uzyc i przenosi Cie do logowania
-        //[Authorize]
-        // Do authorize mozna dodawac role, jezeli dodasz role, to tylko dla tej roli bedzie dostepna ta akcja
-        // Role ustawiasz w Database pod table dbo.AspNetRoles dodajesz tam jakie Id ma jaka rola
-        // pozniej w AspNetUserRoles ustawiasz, kto ma miec jaka role
-        // Mozna ustawic, ze user jest tez adminem, albo zrobic [Authorize(Roles = "User", "Admin")], bo inaczej
-        // jako admin nie masz dostepu tam gdzie user, bo jestes po prostu innym typem uzytkownika
-        //[Authorize(Roles ="Admin")]
-        //[Authorize]
         public ActionResult New()
         {
             return View("EventForm");
         }
 
-        // Allow Anonumous pozwala wchodzic na te akcje bez logowania, mimio, ze caly kontroler ma [Authorize]
-        //[AllowAnonymous]
         public ActionResult Details(int Id)
         {
             var eventDetails = _eventService.GetEventById(Id);
@@ -65,34 +52,50 @@ namespace EventsApplication.Controllers
 
         public ActionResult Edit(int Id)
         {
-            //EventFormViewModel viewModel = _eventService.EditEvent(Id);
+            var eventEdit = _eventService.EditEvent(Id);
+            var viewModel = new EventDetailsViewModel(
+                eventEdit.Id,
+                eventEdit.Name,
+                eventEdit.Description,
+                eventEdit.Location,
+                eventEdit.StartDate,
+                eventEdit.EndDate,
+                eventEdit.TicketsLeft);
 
-            //return View("EventForm", viewModel);
-            return Content("edit");
+            return View("EventForm", viewModel);
         }
 
 
         [HttpPost]
-        public ActionResult Save(EventFormViewModel newEventFormViewModel)
+        public ActionResult Save(EventDetailsViewModel EventDetailsViewModel)
         {
-            //ModelState.Remove("Id");
-            //if (!ModelState.IsValid)
-            //{
+            ModelState.Remove("Id");
+            if (!ModelState.IsValid)
+            { 
 
-            //    return View("EventForm");
-            //}
-            //_eventService.SaveNewEditEvent(newEventFormViewModel);
+               return View("EventForm");
+            }
 
-            //return RedirectToAction("Index", "Event");
-            return Content("save");
+            var eventModel = new EventModel
+            (
+                EventDetailsViewModel.Id,
+                EventDetailsViewModel.Name,
+                EventDetailsViewModel.Description,
+                EventDetailsViewModel.Location,
+                EventDetailsViewModel.StartDate,
+                EventDetailsViewModel.EndDate,
+                EventDetailsViewModel.TicketsLeft
+            );
+            _eventService.SaveEvent(eventModel);
+
+            return RedirectToAction("Index", "Event");
         }
 
         public ActionResult Delete(int Id)
         {
-            //_eventService.DeleteEvent(Id);
+            _eventService.DeleteEvent(Id);
 
-            //return RedirectToAction("Index", "Event");
-            return Content("delete");
+            return RedirectToAction("Index", "Event");
         }
 
     }

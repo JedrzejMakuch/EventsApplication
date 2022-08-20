@@ -23,10 +23,9 @@
                 <td>@e.Name</td>
                 <td>@e.TicketsLeft</td>
                 <td>@Html.ActionLink("Details", "Details", "Event", new { id = e.Id }, null)</td>
-                @if (User.IsInRole("Admin"))
-                {
+                
                 <td>@Html.ActionLink("Edit", "Edit", "Event", new { id = e.Id }, null)</td>
-                <td>@Html.ActionLink("Delete", "Delete", "Event", new { id = e.Id }, null)</td>}
+                <td>@Html.ActionLink("Delete", "Delete", "Event", new { id = e.Id }, null)</td>
             </tr>
         }
     </tbody>

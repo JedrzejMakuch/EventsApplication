@@ -1,10 +1,11 @@
-﻿@model EventsLibrary.ViewModel.TicketListViewModel
+﻿@using EventsApplication.ViewModels
+@model TicketListViewModel
 @{
     ViewBag.Title = "TicketList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>Ticket List for @Model.Name</h3>
+<h3>Ticket List </h3>
 
 <table class="table table-bordered table-hover">
     <thead>
@@ -12,22 +13,18 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
-            <th>Registered</th>
             <th>Ticket number</th>
         </tr>
     </thead>
     <tbody>
-
-        @foreach (var t in Model.Tickets)
+        @foreach(var t in Model.Tickets)
             {
                 <tr>
-                    <td>@t.Customer.FirstName</td>
-                    <td>@t.Customer.LastName</td>
-                    <td>@t.Customer.Email</td>
-                    <td>@t.Customer.IsRegistered</td>
+                    <td>@t.FirstName</td>
+                    <td>@t.LastName</td>
+                    <td>@t.Email</td>
                     <td>@t.Id</td>
                 </tr>
             }
-
     </tbody>
 </table>

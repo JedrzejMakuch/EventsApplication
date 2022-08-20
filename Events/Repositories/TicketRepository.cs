@@ -23,70 +23,64 @@ namespace Events.Repositories
             _customerService = customerService;
         }
 
-        public Ticket TicketId(int Id)
+        public Ticket TicketById(int Id)
         {
             return _dbContext.Tickets.FirstOrDefault(t => t.Event.Id == Id);
         }
 
-        public IQueryable<Ticket> TicketIncludedEventCustomer(int Id)
+        public  Ticket TicketBy(int Id)
         {
-            return _dbContext.Tickets
-                            .Include(t => t.Customer)
-                            .Include(t => t.Event)
-                            .Where(t => t.Event.Id == Id);
+            return _dbContext.Tickets.FirstOrDefault(t => t.Id == Id);
         }
 
-        public void BuyTickets(BuyTicketFormViewModel buyTicketFormViewModel, int Id)
+        public Ticket TicketIncludedEventCustomer(int Id)
         {
-            var eventsInDb = _eventRepository.EventId(Id);
-            var evnt = _dbContext.Events.FirstOrDefault(e => e.Id == eventsInDb.Id);
-            if (evnt != null)
-            {
-
-
-                if (buyTicketFormViewModel.CustomerId == 0)
-                {
-                    var viewModel = new BuyTicketFormViewModel
-                    {
-                        Ticket = new Ticket
-                        {
-                            Customer = new Customer
-                            {
-                                FirstName = buyTicketFormViewModel.FirstName,
-                                LastName = buyTicketFormViewModel.LastName,
-                                Email = buyTicketFormViewModel.Email,
-                                IsRegistered = null,
-                            },
-                            Event = evnt,
-
-                        },
-
-                    };
-                    viewModel.Ticket.Event.Tickets--;
-                    _dbContext.Customers.Add(viewModel.Ticket.Customer);
-                    _dbContext.Tickets.Add(viewModel.Ticket);
-                }
-
-                _dbContext.SaveChanges();
-
-            }
-
-
+            return _dbContext.Tickets.Include(t => t.Event).Include(t => t.Customer).FirstOrDefault(t => t.Event.Id == Id);
         }
 
-        public Ticket TicketByEventId(int Id)
+        public IEnumerable<Ticket> GetTicketListForEvent(int EventId)
         {
             return _dbContext.Tickets
-                .Include(t => t.Event)
                 .Include(t => t.Customer)
-                .FirstOrDefault(c => c.Id == Id);
+                .Where(e => e.Event.Id == EventId)
+                .AsNoTracking()
+                .ToList();
         }
 
-        public void RefundTicket(ReturnTicketFormViewModel returnTicketFormViewModel)
+        public void BuyTickets(Ticket Ticket)
         {
-            var ticket = TicketByEventId(returnTicketFormViewModel.Id);
+           
+            var evntInDb = _eventRepository.EventId(Ticket.Event.Id);
+            var events = _dbContext.Events.FirstOrDefault(e => e.Id == evntInDb.Id);
+            Ticket.Event = events;
 
-            if (_customerService.ValidateCustomer(returnTicketFormViewModel, ticket))
+            Ticket.Event.Tickets--;
+
+            _dbContext.Customers.Add(Ticket.Customer);
+            _dbContext.Tickets.Add(Ticket);
+
+            _dbContext.SaveChanges();
+
+        }
+
+
+        //}
+
+        //public Ticket TicketByEventId(int Id)
+        //{
+        //    return _dbContext.Tickets
+        //        .Include(t => t.Event)
+        //        .Include(t => t.Customer)
+        //        .FirstOrDefault(c => c.Id == Id);
+        //}
+
+        public void RefundTicket(Ticket ticket)
+        {
+            var tickets = TicketById(ticket.Id);
+
+            if (ticket.Customer.FirstName == tickets.Customer.FirstName &&
+                ticket.Customer.LastName == tickets.Customer.LastName &&
+                ticket.Customer.Email == tickets.Customer.Email)
             {
                 ticket.Event.Tickets++;
                 _dbContext.Customers.Remove(ticket.Customer);

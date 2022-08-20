@@ -1,19 +1,18 @@
 ﻿using EventsLibrary.Models;
-using EventsLibrary.ViewModel;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Events.Repositories
 {
     public interface ITicketRepository
     {
-        Ticket TicketId(int Id);
-        IQueryable<Ticket> TicketIncludedEventCustomer(int Id);
-        void BuyTickets(BuyTicketFormViewModel buyTicketFormViewModel, int Id);
-        Ticket TicketByEventId(int Id);
-        void RefundTicket(ReturnTicketFormViewModel returnTicketFormViewModel);
+        Ticket TicketById(int Id);
+        Ticket TicketIncludedEventCustomer(int Id);
+        IEnumerable<Ticket> GetTicketListForEvent(int EventId);
+        void BuyTickets(Ticket Ticket);
+
+        //void BuyTickets(BuyTicketModel BuyTicketModel);
+        //Ticket TicketByEventId(int Id);
+        void RefundTicket(Ticket Ticket);
+        Ticket TicketBy(int Id);
     }
 }

@@ -14,7 +14,6 @@
 <p>Tickets left: @Model.TicketsLeft</p>
 <button type="submit" class="btn">@Html.ActionLink("Buy ticket", "BuyTicket", "Ticket", new { Id = Model.Id }, null)</button>
 
-@if (User.IsInRole("Admin"))
-{
+
     <button type="submit" class="btn">@Html.ActionLink("Ticket List", "TicketList", "Ticket", new { Id = Model.Id }, null)</button>
-}
+

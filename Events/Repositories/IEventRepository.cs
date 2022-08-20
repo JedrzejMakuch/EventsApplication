@@ -1,10 +1,5 @@
 ﻿using EventsLibrary.Models;
-using EventsLibrary.ViewModel;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Events.Repositories
 {
@@ -14,7 +9,7 @@ namespace Events.Repositories
 
         Event EventId(int Id);
 
-        void AddOrEditEvent(EventFormViewModel newEventFormViewModel);
+        void SaveEditEvent(Event Event);
 
         void DeleteEvnt(int Id);
     }

@@ -1,10 +1,5 @@
 ﻿using EventsLibrary.Models;
-using EventsLibrary.ViewModel;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Events.Repositories
 {
@@ -12,6 +7,7 @@ namespace Events.Repositories
     {
         private readonly ApplicationDbContext _dbContext;
 
+   
         public EventRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -27,32 +23,21 @@ namespace Events.Repositories
             return _dbContext.Events.SingleOrDefault(c => c.Id == Id);
         }
 
-        public void AddOrEditEvent(EventFormViewModel newEventFormViewModel)
+        public void SaveEditEvent(Event Event)
         {
-            if (newEventFormViewModel.Id == 0)
+            if (Event.Id == 0)
             {
-                var events = new Event
-                {
-                    Id = newEventFormViewModel.Id,
-                    Name = newEventFormViewModel.Name,
-                    Description = newEventFormViewModel.Description,
-                    DateOfStart = newEventFormViewModel.DateOfStart,
-                    DateOfEnd = newEventFormViewModel.DateOfEnd,
-                    Location = newEventFormViewModel.Location,
-                    Tickets = newEventFormViewModel.Tickets,
-                };
-                _dbContext.Events.Add(events);
+                _dbContext.Events.Add(Event);
             }
             else
             {
-                var eventInDb = _dbContext.Events.Single(e => e.Id == newEventFormViewModel.Id);
-                eventInDb.Name = newEventFormViewModel.Name;
-                eventInDb.Description = newEventFormViewModel.Description;
-                eventInDb.Tickets = newEventFormViewModel.Tickets;
-                eventInDb.DateOfStart = newEventFormViewModel.DateOfStart;
-                eventInDb.DateOfEnd = newEventFormViewModel.DateOfEnd;
-                eventInDb.Location = newEventFormViewModel.Location;
-
+                var eventInDb = _dbContext.Events.Single(e => e.Id == Event.Id);
+                eventInDb.Name = Event.Name;
+                eventInDb.Description = Event.Description;
+                eventInDb.Tickets = Event.Tickets;
+                eventInDb.DateOfStart = Event.DateOfStart;
+                eventInDb.DateOfEnd = Event.DateOfEnd;
+                eventInDb.Location = Event.Location;
             }
 
             _dbContext.SaveChanges();
@@ -61,13 +46,15 @@ namespace Events.Repositories
         public void DeleteEvnt(int Id)
         {
             var events = _dbContext.Events.FirstOrDefault(e => e.Id == Id);
-            var ticket = _dbContext.Tickets.FirstOrDefault(t => t.Event.Id == Id);
+            var tickets = _dbContext.Tickets.Where(t => t.Event.Id == Id);
 
-            if (ticket != null)
+            if (tickets != null)
             {
-                _dbContext.Tickets.Remove(ticket);
+                foreach(var t in tickets)
+                {
+                    _dbContext.Tickets.Remove(t);
+                }
             }
-
             _dbContext.Events.Remove(events);
             _dbContext.SaveChanges();
         }

@@ -11,3 +11,4 @@
 //    }
 //}
 // Zrobic migracje z Role/ Dodaj role Id 1, "User", Id 2 "Admi / Daodaj uzytkownika Admin.
+// Validation in browser

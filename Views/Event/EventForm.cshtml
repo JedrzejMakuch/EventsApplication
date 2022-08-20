@@ -1,4 +1,5 @@
-﻿@model EventsLibrary.ViewModel.EventFormViewModel
+﻿@using EventsApplication.ViewModels
+@model EventDetailsViewModel
 @{
     ViewBag.Title = "New";
 }
@@ -12,14 +13,14 @@
         @Html.ValidationMessageFor(m => m.Name)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.DateOfStart)
-        @Html.TextBoxFor(m => m.DateOfStart, "{0:d MMM yyyy}", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.DateOfStart)
+        @Html.LabelFor(m => m.StartDate)
+        @Html.TextBoxFor(m => m.StartDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.StartDate)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.DateOfEnd)
-        @Html.TextBoxFor(m => m.DateOfEnd, "{0:d MMM yyyy}", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.DateOfEnd)
+        @Html.LabelFor(m => m.EndDate)
+        @Html.TextBoxFor(m => m.EndDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.EndDate)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Description)
@@ -32,9 +33,9 @@
         @Html.ValidationMessageFor(m => m.Location)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Tickets)
-        @Html.TextBoxFor(m => m.Tickets, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Tickets)
+        @Html.LabelFor(m => m.TicketsLeft)
+        @Html.TextBoxFor(m => m.TicketsLeft, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.TicketsLeft)
     </div>
     @Html.HiddenFor(m => m.Id)
     <button type="submit" class="btn btn-primary">Save</button>

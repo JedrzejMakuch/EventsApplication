@@ -1,7 +1,9 @@
 ﻿using EventsApplication.Services.Abstractions;
-using EventsLibrary.Service;
-using EventsLibrary.ViewModel;
+using EventsApplication.ViewModels;
+using System.Linq;
 using System.Web.Mvc;
+using EventsApplication.Service;
+using EventsApplication.Services.Models;
 
 namespace EventsApplication.Controllers
 {
@@ -18,28 +20,31 @@ namespace EventsApplication.Controllers
 
         public ActionResult TicketList(int Id)
         {
-            var viewModel = new TicketListViewModel
-            {
-                Tickets = _ticketService.GetTicketWithIncludedCustomer(Id),
-                EventId = _eventService.GetEventById(Id).Id,
-                Name = _eventService.GetEventById(Id).Name
-            };
+            var ticket = _ticketService.GetTicketWithIncludedCustomer(Id);
+            var viewModel = new TicketListViewModel(
+                ticket.EventId,
+                ticket.Name,
+                ticket.Tickets.Select(e => new ViewModels.TicketListModel(
+                    e.Id,
+                    e.FirstName,
+                    e.LastName,
+                    e.Email)));
+            
             return View("TicketList", viewModel);
         }
 
         public ActionResult BuyTicket(int Id)
         {
-            var viewModel = new BuyTicketFormViewModel
+            var viewModel = new BuyTicketViewModel
             {
                 EventId = _eventService.GetEventById(Id).Id,
-                Ticket = _ticketService.GetNewTicket(),
             };
 
             return View("BuyTicketForm", viewModel);
         }
 
         [HttpPost]
-        public ActionResult BuyTicketSave(BuyTicketFormViewModel buyTicketFormViewModel)
+        public ActionResult BuyTicketSave(BuyTicketViewModel buyTicketViewModel)
         {
             ModelState.Remove("Id");
             if (!ModelState.IsValid)
@@ -47,7 +52,12 @@ namespace EventsApplication.Controllers
 
                 return View("BuyTicketForm");
             }
-            _ticketService.BuyTicket(buyTicketFormViewModel, buyTicketFormViewModel.EventId);
+            var viewModel = new BuyTicketModel(
+                buyTicketViewModel.EventId,
+                buyTicketViewModel.FirstName,
+                buyTicketViewModel.LastName,
+                buyTicketViewModel.Email);
+            _ticketService.BuyTicket(viewModel);
 
             return RedirectToAction("Index", "Event");
         }
@@ -58,14 +68,20 @@ namespace EventsApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult RefundTicketSave(ReturnTicketFormViewModel returnTicketFormViewModel)
+        public ActionResult RefundTicketSave(RefundTicketViewModel refundTicketViewModel)
         {
-            if (!ModelState.IsValid)
-            {
+            //if (!ModelState.IsValid)
+            //{
 
-                return View("RefundTicketForm");
-            }
-            _ticketService.RefundTheTicket(returnTicketFormViewModel);
+            //    return View("RefundTicketForm");
+            //}
+            var refundTicketModel = new RefundTicketModel(
+                refundTicketViewModel.Id,
+                refundTicketViewModel.FirstName,
+                refundTicketViewModel.LastName,
+                refundTicketViewModel.Email);
+
+            _ticketService.RefundTheTicket(refundTicketModel);
 
             return RedirectToAction("Index", "Event");
         }

@@ -7,8 +7,8 @@ namespace EventsApplication.Services.Abstractions
     {
         EventModel GetEventById(int Id);
         IEnumerable<EventModel> GetEventList();
-        //void SaveNewEditEvent(EventFormViewModel newEventFormViewModel);
-        //void DeleteEvent(int Id);
-        //EventFormViewModel EditEvent(int Id);
+        void SaveEvent(EventModel EventModel);
+        void DeleteEvent(int Id);
+        EventModel EditEvent(int Id);
     }
 }
