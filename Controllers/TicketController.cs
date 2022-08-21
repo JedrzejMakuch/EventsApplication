@@ -70,11 +70,11 @@ namespace EventsApplication.Controllers
         [HttpPost]
         public ActionResult RefundTicketSave(RefundTicketViewModel refundTicketViewModel)
         {
-            //if (!ModelState.IsValid)
-            //{
+            if (!ModelState.IsValid)
+            {
 
-            //    return View("RefundTicketForm");
-            //}
+                return View("RefundTicketForm");
+            }
             var refundTicketModel = new RefundTicketModel(
                 refundTicketViewModel.Id,
                 refundTicketViewModel.FirstName,

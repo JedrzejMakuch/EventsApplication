@@ -5,7 +5,6 @@ using EventsApplication.Service;
 using EventsApplication.Services;
 using EventsApplication.Services.Abstractions;
 using EventsLibrary.Models;
-using EventsLibrary.Service;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -24,7 +23,7 @@ namespace EventsApplication
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<ApplicationDbContext>().AsSelf();
-            builder.RegisterType<CustomerService>().As<ICustomerService>();
+            //builder.RegisterType<CustomerService>().As<ICustomerService>();
             builder.RegisterType<EventService>().As<IEventService>();
             builder.RegisterType<TicketService>().As<ITicketService>();
 

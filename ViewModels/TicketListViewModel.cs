@@ -1,5 +1,4 @@
-﻿using EventsApplication.Services.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace EventsApplication.ViewModels
 {

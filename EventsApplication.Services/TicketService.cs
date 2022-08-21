@@ -16,22 +16,6 @@ namespace EventsApplication.Service
             _eventRepository = eventRepository;
         }
 
-        //public BuyTicketModel GetTicketById(int Id)
-        //{
-
-        //    var dto = _ticketRepository.TicketById(Id);
-        //    var dtos = _ticketRepository.GetTicketList();
-        //    return new BuyTicketModel(
-        //        dto.Event.Id,
-        //        dto.Customer.FirstName,
-        //        dto.Customer.LastName,
-        //        dto.Customer.Email,
-        //        dtos,
-        //        dto.Customer.Id,
-        //        dto.Event.Name);
-        //    //return _ticketRepository.TicketById(Id);
-        //}
-
         public TicketListModel GetTicketWithIncludedCustomer(int Id)
         {
             var ticket = _ticketRepository.TicketIncludedEventCustomer(Id);
@@ -46,11 +30,6 @@ namespace EventsApplication.Service
                     e.Customer.LastName,
                     e.Customer.Email)));
         }
-
-        //    public Ticket GetNewTicket()
-        //    {
-        //        return new Ticket();
-        //    }
 
         public void BuyTicket(BuyTicketModel buyTicketModel)
         {
@@ -71,17 +50,11 @@ namespace EventsApplication.Service
             
         }
 
-        //    public Ticket GetTicketByEventId(int Id)
-        //    {
-        //        return _ticketRepository.TicketByEventId(Id);
-        //    }
-
         public void RefundTheTicket(RefundTicketModel refundTicketModel)
         {
-            var ticket = _ticketRepository.TicketBy(refundTicketModel.Id);
+            var ticket = _ticketRepository.TicketByTicketId(refundTicketModel.Id);
 
             _ticketRepository.RefundTicket(ticket);
         }
-        //}
     }
 }

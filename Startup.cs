@@ -1,6 +1,4 @@
-﻿using Autofac;
-using EventsLibrary.Service;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(EventsApplication.Startup))]

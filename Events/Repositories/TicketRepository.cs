@@ -1,12 +1,7 @@
 ﻿using EventsLibrary.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity;
-using EventsLibrary.ViewModel;
-using EventsLibrary.Service;
 
 namespace Events.Repositories
 {
@@ -14,23 +9,16 @@ namespace Events.Repositories
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IEventRepository _eventRepository;
-        private readonly ICustomerService _customerService;
 
-        public TicketRepository(ApplicationDbContext dbContext, IEventRepository eventRepository, ICustomerService customerService)
+        public TicketRepository(ApplicationDbContext dbContext, IEventRepository eventRepository)
         {
             _dbContext = dbContext;
             _eventRepository = eventRepository;
-            _customerService = customerService;
         }
 
-        public Ticket TicketById(int Id)
+        public Ticket TicketByTicketId(int Id)
         {
-            return _dbContext.Tickets.FirstOrDefault(t => t.Event.Id == Id);
-        }
-
-        public  Ticket TicketBy(int Id)
-        {
-            return _dbContext.Tickets.FirstOrDefault(t => t.Id == Id);
+            return _dbContext.Tickets.Include(e => e.Customer).Include(e => e.Event).FirstOrDefault(t => t.Id == Id);
         }
 
         public Ticket TicketIncludedEventCustomer(int Id)
@@ -63,24 +51,13 @@ namespace Events.Repositories
 
         }
 
-
-        //}
-
-        //public Ticket TicketByEventId(int Id)
-        //{
-        //    return _dbContext.Tickets
-        //        .Include(t => t.Event)
-        //        .Include(t => t.Customer)
-        //        .FirstOrDefault(c => c.Id == Id);
-        //}
-
         public void RefundTicket(Ticket ticket)
         {
-            var tickets = TicketById(ticket.Id);
+            var ticketInDb = TicketByTicketId(ticket.Id);
 
-            if (ticket.Customer.FirstName == tickets.Customer.FirstName &&
-                ticket.Customer.LastName == tickets.Customer.LastName &&
-                ticket.Customer.Email == tickets.Customer.Email)
+            if (ticket.Customer.FirstName == ticketInDb.Customer.FirstName &&
+                ticket.Customer.LastName == ticketInDb.Customer.LastName &&
+                ticket.Customer.Email == ticketInDb.Customer.Email)
             {
                 ticket.Event.Tickets++;
                 _dbContext.Customers.Remove(ticket.Customer);
@@ -88,7 +65,6 @@ namespace Events.Repositories
                 _dbContext.SaveChanges();
             }
         }
-
 
     }
 }
