@@ -19,5 +19,7 @@ namespace EventsApplication.ViewModels
         [Required(ErrorMessage = "Adress email is required.")]
         [Display(Name = "Adress email")]
         public string Email { get; set; }
+
     }
+
 }

@@ -71,9 +71,16 @@ namespace EventsApplication.Controllers
         {
             ModelState.Remove("Id");
             if (!ModelState.IsValid)
-            { 
-
-               return View("EventForm");
+            {
+                var viewModel = new EventDetailsViewModel(
+                    EventDetailsViewModel.Id,
+                    EventDetailsViewModel.Name,
+                    EventDetailsViewModel.Description,
+                    EventDetailsViewModel.Location,
+                    EventDetailsViewModel.StartDate,
+                    EventDetailsViewModel.EndDate,
+                    EventDetailsViewModel.TicketsLeft);
+               return View("EventForm", viewModel);
             }
 
             var eventModel = new EventModel

@@ -37,7 +37,7 @@ namespace EventsApplication.Controllers
         {
             var viewModel = new BuyTicketViewModel
             {
-                EventId = _eventService.GetEventById(Id).Id,
+                EventId = Id,
             };
 
             return View("BuyTicketForm", viewModel);
@@ -49,8 +49,14 @@ namespace EventsApplication.Controllers
             ModelState.Remove("Id");
             if (!ModelState.IsValid)
             {
-
-                return View("BuyTicketForm");
+                var viewModelState = new BuyTicketViewModel()
+                {
+                    EventId = buyTicketViewModel.EventId,
+                    FirstName = buyTicketViewModel.FirstName,
+                    LastName = buyTicketViewModel.LastName,
+                    Email = buyTicketViewModel.Email
+                };
+                return View("BuyTicketForm", viewModelState);
             }
             var viewModel = new BuyTicketModel(
                 buyTicketViewModel.EventId,
@@ -72,8 +78,12 @@ namespace EventsApplication.Controllers
         {
             if (!ModelState.IsValid)
             {
-
-                return View("RefundTicketForm");
+                var viewModelState = new RefundTicketViewModel(
+                    refundTicketViewModel.Id,
+                    refundTicketViewModel.FirstName,
+                    refundTicketViewModel.FirstName,
+                    refundTicketViewModel.Email);
+                return View("RefundTicketForm", viewModelState);
             }
             var refundTicketModel = new RefundTicketModel(
                 refundTicketViewModel.Id,
